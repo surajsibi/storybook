@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-function AlertTitle() {
-  return (
-    <div>
-      AlertTitle
-    </div>
-  )
+function AlertTitle({ children }: { children: React.ReactNode }) {
+  return <div className="">{children}</div>;
 }
 
-export default AlertTitle
+export default AlertTitle;

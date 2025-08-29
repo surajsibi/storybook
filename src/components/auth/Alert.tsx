@@ -1,52 +1,53 @@
 import React from "react";
-import { CircleCheckBig, Trash2, CircleAlert } from "lucide-react";
-import { cn } from "@/_lib/cn";
+import AlertComponent from "./alertComponents/Alert";
+import AlertTitle from "./alertComponents/AlertTitle";
+import AlertDescription from "./alertComponents/AlertDescription";
+import AlertSuccessIcon from "./alertComponents/AlertSuccessIcon";
+import { AlertCircleIcon } from "lucide-react";
+import AlertBinIcon from "./alertComponents/AlertBinIcon";
 
-interface AlertProps {
-  heading: string;
-  subHeading?: string;
-  icons?: string;
-  containerStyle?: string;
-  textContainerStyle?: string;
-  subHeadingClassName?: string;
-  headingClassName?: string;
-}
-function Alert({
-  heading,
-  subHeading,
-  icons,
-  containerStyle,
-  textContainerStyle,
-  subHeadingClassName,
-  headingClassName,
-}: AlertProps) {
-  const icon = [
-    {
-      name: "success",
-      icon: <CircleCheckBig aria-label="success" color="green" size={20} />,
-    },
-    {
-      name: "delete",
-      icon: <Trash2 color="red" aria-label="delete" size={20} />,
-    },
-    {
-      name: "error",
-      icon: <CircleAlert color="red" aria-label="error" size={20} />,
-    },
-  ];
-
+function Alert() {
   return (
-    <div
-      className={cn(
-        "flex gap-4 items-start border py-3 px-6  rounded-md bg-white",
-        containerStyle
-      )}
-    >
-      {icons && icon.find((item) => item.name === icons)?.icon}
-      <div className={cn("flex flex-col", textContainerStyle)}>
-        <h1 className={cn("text-black",icons==="error"?"text-red-600":"",headingClassName)}>{heading}</h1>
-        <p className={cn("text-gray-500",icons==="error"?"text-red-400":"", subHeadingClassName)}>{subHeading}</p>
-      </div>
+    <div className=" flex gap-4 flex-col">
+      <AlertComponent>
+        <div className="flex gap-3">
+          <AlertSuccessIcon />
+          <div className="flex flex-col">
+            <AlertTitle>Success! Your changes have been saved</AlertTitle>
+            <AlertDescription>
+              This is an alert with icon, title and description.
+            </AlertDescription>
+          </div>
+        </div>
+      </AlertComponent>
+      <AlertComponent variant="destructive">
+        <div className="flex gap-3">
+          <AlertCircleIcon />
+          <div className="flex flex-col">
+            <AlertTitle>
+              Please verify your billing information and try again.
+            </AlertTitle>
+            <AlertDescription>
+              <p>Please verify your billing information and try again.</p>
+              <ul className="list-inside list-disc text-sm">
+                <li>Check your card details</li>
+                <li>Ensure sufficient funds</li>
+                <li>Verify billing address</li>
+              </ul>
+            </AlertDescription>
+          </div>
+        </div>
+      </AlertComponent>
+      <AlertComponent>
+        <div className="flex gap-3">
+          <AlertBinIcon />
+          <div className="flex flex-col">
+            <AlertTitle>
+              This Alert has a title and an icon. No description.
+            </AlertTitle>
+          </div>
+        </div>
+      </AlertComponent>
     </div>
   );
 }
